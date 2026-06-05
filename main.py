@@ -95,17 +95,18 @@ async def websocket_endpoint(websocket: WebSocket, room_id: str):
                     placed = True
                 else:
                     a, b = tile
-                    # try match left
-                    if a == left or b == left:
-                        # orient so that matching number touches
-                        if b == left:
+                    # try match left: tile's right must equal left
+                    if b == left or a == left:
+                        # orient so tile[1] == left
+                        if a == left:
                             tile = [b, a]
                         state["hands"][player].pop(idx)
                         state["board"].insert(0, tile)
                         placed = True
-                    # try match right
+                    # try match right: tile's left must equal right
                     elif a == right or b == right:
-                        if a == right:
+                        # orient so tile[0] == right
+                        if b == right:
                             tile = [b, a]
                         state["hands"][player].pop(idx)
                         state["board"].append(tile)
@@ -135,12 +136,14 @@ async def websocket_endpoint(websocket: WebSocket, room_id: str):
                                 a, b = tile2
                                 left = state["board"][0][0]
                                 right = state["board"][-1][1]
-                                if a == left or b == left:
-                                    if b == left:
+                                # match left: tile2.right == left
+                                if b == left or a == left:
+                                    if a == left:
                                         tile2 = [b, a]
                                     state["board"].insert(0, tile2)
                                 else:
-                                    if a == right:
+                                    # match right: tile2.left == right
+                                    if b == right:
                                         tile2 = [b, a]
                                     state["board"].append(tile2)
                             placed = True
