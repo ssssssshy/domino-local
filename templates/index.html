@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Домино</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>🎮 Игра Домино</h1>
+    <div id="room-id-display"></div>
+    <div id="status"></div>
+    <div id="notification"></div>
+    
+    <div id="connection-section" class="connection-container">
+        <h2>Присоединиться к игре</h2>
+        <input type="text" id="room-input" placeholder="Введите ID комнаты...">
+        <div class="button-group">
+            <button id="connect-btn">Присоединиться</button>
+            <button id="create-btn">Создать новую игру</button>
+        </div>
+    </div>
+    
+    <div id="game-table"></div>
+    
+    <script src="/static/app.js"></script>
+</body>
+</html>
+
